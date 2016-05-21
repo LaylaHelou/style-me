@@ -2,44 +2,63 @@ var styles={
     
     shirts:[
         {
-            url:"http://www.how-to-draw-funny-cartoons.com/image-files/cartoon-t-shirts-005.jpg"
+            url:"../images/styles_0001_Layer-5.png"
         },
         {
-            url:""
+            url:"../images/styles_0002_Layer-11.png"
         }
     ],
     glasses:[
         {
-            url:""
+            url:"../images/shades.png"
         },
         {
-            url:""
-        }
-        ],
-    contactlenses:[
-        {
-            url:""
+            url:"../images/styles_0000_layer-3.png"
         },
         {
-            url:""
+            url:"styles_0003_Layer-8.png"
         }
-        ]
+    ],
+    hats:[
+        {
+            url:"../images/hard-hat-yellow-png"
+        }
+    ],
+    necklaces:[
+        {
+            url:"styles_0001_Layer-2.png"
+        }
+    ]
         
-}
+};
 
 function showDOM (){
      var content= $(".styleDisplay").html();
-     
+     $(".styleList").text(content);
 }
 
-function showStyles () {
-    var styleChoice=null; //Enter User's Input Here From CSS Selector
-    var arrayAccess= styles.styleChoice;
-    displayContent(arrayAccess,styleChoice);
+function userValue () {
+    $("#userInputClass").keypress(function(event){
+        if(event.which===13){
+            showStyles($("#userInputClass").val())
+        }
+    })
+}
+
+function showStyles (userInput) {
+    var styleChoice=userInput; //Enter User's Input Here From CSS Selector
+    var classValue=styleChoice.replace('.','')
+    var arrayAccess= styles[classValue];
+    displayContent(arrayAccess,classValue);
 }
 
 function imgGallery (){
-    for()
+    var keys=[];
+    keys=Object.keys(styles);
+    for(var i=0;i<keys.length; i++){
+        
+        displayContent(styles.keys[i],keys[i])
+    }
 }
 
 function displayContent (selectedArray,selectedClass) {
@@ -50,13 +69,11 @@ function displayContent (selectedArray,selectedClass) {
 }
 
 $(document).ready(function(){
+    userValue();
     showStyles();
     showDOM();
-    imgGallery()
+    imgGallery();
     console.log(styles);
-    displayContent(styles.shirts,"Fpic");
-    
+    // displayContent(styles.shirts,"Fpic");
     
 });
-
-
