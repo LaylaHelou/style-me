@@ -2,35 +2,41 @@ var styles={
     
     shirts:[
         {
-            url:"../images/styles_0001_Layer-5.png"
+            url:"images/greenshirt.png",
+            name:"green"
         },
         {
-            url:"../images/styles_0002_Layer-11.png"
+            url:"images/redshirt.png",
+            name:"red"
         }
     ],
     glasses:[
         {
-            url:"../images/shades.png"
+            url:"images/shades.png",
+            name:"shades"
         },
         {
-            url:"../images/styles_0000_layer-3.png"
-        },
-        {
-            url:"styles_0003_Layer-8.png"
+            url:"images/yellowshades.png",
+            name:"yellowshades"
         }
     ],
     hats:[
         {
-            url:"../images/hard-hat-yellow-png"
+        url:"images/funnyhat.png",
+        name:"funnyhat"
+            
         }
-    ],
+        ],
     necklaces:[
         {
-            url:"styles_0001_Layer-2.png"
+            url:"images/bluenecklace.png",
+            name:"blue"
         }
     ]
         
-};
+}
+
+var currentItems=[];
 
 function showDOM (){
      var content= $(".styleDisplay").html();
@@ -42,38 +48,41 @@ function userValue () {
         if(event.which===13){
             showStyles($("#userInputClass").val())
         }
-    })
+    });
 }
 
 function showStyles (userInput) {
     var styleChoice=userInput; //Enter User's Input Here From CSS Selector
-    var classValue=styleChoice.replace('.','')
-    var arrayAccess= styles[classValue];
-    displayContent(arrayAccess,classValue);
+    var classValue=styleChoice.replace('.','');
+    var selectors=classValue.split(" ");
+    var arrayAccess= styles[selectors[0]];
+    var item = arrayAccess.find(function(i){
+        return i.name==selectors[1];
+    });
+    currentItems.push(item);
+    displayContent(arrayAccess,"Fpic");
 }
 
 function imgGallery (){
-    var keys=[];
-    keys=Object.keys(styles);
+    var keys=Object.keys(styles);
     for(var i=0;i<keys.length; i++){
-        
-        displayContent(styles.keys[i],keys[i])
+        displayContent(styles[keys[i]],keys[i]);
     }
 }
 
+
 function displayContent (selectedArray,selectedClass) {
     for(var i=0 ;i<selectedArray.length ;i++){
-        var imgSources= selectedArray[i].url
-        $("."+selectedClass).append("<img class='imgGallery' src='"+imgSources+"'>")
+        var imgSources= selectedArray[i].url;
+        var className=selectedArray[i].name;
+        $("."+selectedClass).append("<img class='imgGallery "+className+"' src='"+imgSources+"'>")
     }
 }
 
 $(document).ready(function(){
     userValue();
-    showStyles();
-    showDOM();
+    // showStyles();
     imgGallery();
     console.log(styles);
-    // displayContent(styles.shirts,"Fpic");
-    
+    showDOM();
 });
