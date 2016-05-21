@@ -1,23 +1,3 @@
-$(document).ready(function(){
-    showStyles();
-})
-
-function showStyles () {
-    var styleChoice=null; //Enter User's Input Here From CSS Selector
-    var arrayAccess= styles.styleChoice;
-    displayContent(arrayAccess);
-}
-
-function displayContent (selectedArray) {
-    for(var i=0 ;i<selectedArray.length ;i++){
-        var imgSources= selectedArray[i]
-        $(".styleDisplay").append("<img src='"+imgSources+"'>")
-    }
-}
-
-
-
-
 var styles={
     
     shirts:[
@@ -31,12 +11,12 @@ var styles={
     glasses:[
         {
             url:""
-        }
+        },
         {
             url:""
         }
         ],
-    contextlenses:[
+    contactlenses:[
         {
             url:""
         },
@@ -47,4 +27,36 @@ var styles={
         
 }
 
+function showDOM (){
+     var content= $(".styleDisplay").html();
+     
+}
+
+function showStyles () {
+    var styleChoice=null; //Enter User's Input Here From CSS Selector
+    var arrayAccess= styles.styleChoice;
+    displayContent(arrayAccess,styleChoice);
+}
+
+function imgGallery (){
+    for()
+}
+
+function displayContent (selectedArray,selectedClass) {
+    for(var i=0 ;i<selectedArray.length ;i++){
+        var imgSources= selectedArray[i].url
+        $("."+selectedClass).append("<img class='imgGallery' src='"+imgSources+"'>")
+    }
+}
+
+$(document).ready(function(){
+    showStyles();
+    showDOM();
+    imgGallery()
+    console.log(styles);
+    displayContent(styles.shirts,"Fpic");
     
+    
+});
+
+
